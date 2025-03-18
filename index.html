@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beach Equipment Rental</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <header>
+        <h1>Beach Equipment Rental</h1>
+        <button id="loginBtn">Login</button>
+    </header>
+    
+    <div id="map"></div>
+    
+    <div id="qrCode" class="hidden">
+        <p>Your QR Code: <span id="qrText"></span></p>
+    </div>
+    
+    <script>
+        const lockers = [
+            { id: 1, name: "Locker 1", lat: 48.8566, lng: 2.3522 },
+            { id: 2, name: "Locker 2", lat: 48.857, lng: 2.353 },
+            // Add more lockers here
+        ];
+
+        const map = L.map('map').setView([48.8566, 2.3522], 14);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+        lockers.forEach(locker => {
+            const marker = L.marker([locker.lat, locker.lng]).addTo(map);
+            marker.bindPopup(`<b>${locker.name}</b><br><button onclick="reserve(${locker.id})">Reserve</button>`);
+        });
+
+        function reserve(lockerId) {
+            const qrCode = `QR-${lockerId}-${Date.now()}`;
+            document.getElementById("qrText").textContent = qrCode;
+            document.getElementById("qrCode").classList.remove("hidden");
+            alert(`Reservation confirmed! Your QR code: ${qrCode}`);
+        }
+    </script>
+    
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #map { height: 400px; width: 80%; margin: auto; }
+        .hidden { display: none; }
+    </style>
+</body>
+</html>
