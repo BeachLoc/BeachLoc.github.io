@@ -10,15 +10,34 @@
 </head>
 <body>
     <header>
-        <h1>Beach Equipment Rental</h1>
-        <button id="loginBtn">Login</button>
+        <div class="logo">🌊 Beach Rental</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
     </header>
     
-    <div id="map"></div>
+    <section id="hero">
+        <h1>Rent Your Beach Equipment Easily</h1>
+        <p>Find lockers near you and reserve your gear with ease.</p>
+    </section>
     
-    <div id="qrCode" class="hidden">
-        <p>Your QR Code: <span id="qrText"></span></p>
-    </div>
+    <section id="map-container">
+        <h2>Find a Locker</h2>
+        <div id="map"></div>
+    </section>
+    
+    <section id="about">
+        <h2>About Our Service</h2>
+        <p>We provide easy and secure beach equipment rentals via smart lockers. No need to carry your gear around!</p>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Beach Rental. All rights reserved.</p>
+    </footer>
     
     <script>
         const lockers = [
@@ -37,16 +56,21 @@
 
         function reserve(lockerId) {
             const qrCode = `QR-${lockerId}-${Date.now()}`;
-            document.getElementById("qrText").textContent = qrCode;
-            document.getElementById("qrCode").classList.remove("hidden");
             alert(`Reservation confirmed! Your QR code: ${qrCode}`);
         }
     </script>
     
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        #map { height: 400px; width: 80%; margin: auto; }
-        .hidden { display: none; }
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #e0f7fa; color: #00796b; }
+        header { display: flex; justify-content: space-between; padding: 1rem; background: #00796b; color: white; }
+        .logo { font-size: 1.5rem; font-weight: bold; }
+        nav ul { list-style: none; display: flex; gap: 1rem; }
+        nav ul li { display: inline; }
+        nav ul li a { color: white; text-decoration: none; font-weight: bold; }
+        #hero { padding: 2rem; background: #4db6ac; color: white; }
+        #map-container { margin: 2rem auto; width: 80%; }
+        #map { height: 400px; width: 100%; }
+        footer { background: #00796b; color: white; padding: 1rem; margin-top: 2rem; }
     </style>
 </body>
 </html>
